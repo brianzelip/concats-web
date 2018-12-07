@@ -1,15 +1,15 @@
 <template>
   <div>
-  <h1>{{ msg }}</h1>
-  <p>data:
+    <h1>{{ msg }}</h1>
+    <p>output:</p>
+    <pre>{{ output }}</pre>
+    <p>data:</p>
     <pre>{{ data }}</pre>
-  </p>
-
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   data() {
@@ -18,7 +18,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(["data"])
+    ...mapState(["data"]),
+    ...mapGetters(["output"])
   }
 };
 </script>
