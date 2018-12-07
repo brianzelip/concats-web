@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-    <p>output:</p>
-    <pre>{{ output }}</pre>
+    <p>concat:</p>
+    <pre>{{ concat }}</pre>
     <p>data:</p>
     <pre>{{ data }}</pre>
   </div>
@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     ...mapState(["data"]),
-    ...mapGetters(["output"])
+    ...mapGetters(["concat"])
   }
 };
 </script>
