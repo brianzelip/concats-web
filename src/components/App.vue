@@ -1,21 +1,20 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
-    <p>concat:</p>
-    <pre>{{ concat }}</pre>
-    <p>data:</p>
-    <pre>{{ data }}</pre>
+    <FileInput></FileInput>
+    <AppOutput></AppOutput>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
 
+import FileInput from "./FileInput.vue";
+import AppOutput from "./AppOutput.vue";
+
 export default {
-  data() {
-    return {
-      msg: "Hello World!"
-    };
+  components: {
+    FileInput,
+    AppOutput
   },
   computed: {
     ...mapState(["data"]),
