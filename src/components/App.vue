@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+// import { mapState, mapGetters } from "vuex";
 
 import TheInput from "./Input/TheInput.vue";
 import TheOutput from "./Output/TheOutput.vue";
@@ -20,10 +20,7 @@ export default {
     TheOutput,
     TheFooter
   },
-  computed: {
-    ...mapState(["data"]),
-    ...mapGetters(["concat"])
-  }
+  computed: {}
 };
 </script>
 
