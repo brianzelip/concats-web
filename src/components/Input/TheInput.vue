@@ -31,6 +31,9 @@ export default {
         const csvContent = event.target.result;
         const jsonOutput = CSV()
           .fromString(csvContent)
+          .on("header", header => {
+            // some ACTION fires to set csvHeaders state
+          })
           .then(j => vm.concatData(j));
       };
       reader.readAsText(file);
