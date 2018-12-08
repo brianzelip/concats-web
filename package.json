@@ -1,6 +1,6 @@
 {
   "name": "concats",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Concat multiple columns from a single row of data into a single string.",
   "main": "index.html",
   "scripts": {
