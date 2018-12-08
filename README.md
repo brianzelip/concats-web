@@ -28,3 +28,21 @@ having a hell of a time figuring out the `FileReader` api. Here are the resource
 - https://developer.mozilla.org/en-US/docs/Web/API/FileReader/result
 - https://scotch.io/tutorials/how-to-handle-file-uploads-in-vue-2 (although not very)
 - https://blog.mounirmesselmeni.de/2012/11/20/reading-csv-file-with-javascript-and-html5-file-api/ (the main source of verbatim copying to make the json able to console log out)
+
+## State
+
+This app's state flow has the following properties:
+
+- csv all content - loaded on file input by user
+  - data type: string
+  - vuex concept: STATE
+- csv headers get displayed to user to select which headers to concat together, after csv all content loads
+  - data type: array of strings
+  - vuex concept: GETTER
+- csv as json
+  - data type: array of objects
+  - vuex concept: GETTER
+- output data - happens after user selects which headers to concat together
+  - data type: string
+  - vuex concept: GETTER
+- reset all above state after output file has been generated, so that app is ready to go at it again
