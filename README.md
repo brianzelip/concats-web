@@ -22,3 +22,9 @@ Web app built to help Dr. No by:
 - [Using files from web applications](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications)
 - [Using files from web applications](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications)
 - [Creating a Vue.js File Reader Component Using the FileReader API](https://alligator.io/vuejs/file-reader-component/)
+
+having a hell of a time figuring out the `FileReader` api. Here are the resources that have been useful:
+
+- https://developer.mozilla.org/en-US/docs/Web/API/FileReader/result
+- https://scotch.io/tutorials/how-to-handle-file-uploads-in-vue-2 (although not very)
+- https://blog.mounirmesselmeni.de/2012/11/20/reading-csv-file-with-javascript-and-html5-file-api/ (the main source of verbatim copying to make the json able to console log out)
