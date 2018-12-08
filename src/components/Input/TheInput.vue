@@ -2,12 +2,13 @@
   <section>
     <label for="fileInput">Select csv file:</label>
     <input
-      @change="fileHandler"
+      @change="handleFile"
       accept=".csv"
       id="fileInput"
       name="fileInput"
       type="file"
     >
+    <pre>{{ cOutput }}</pre>
   </section>
 </template>
 
@@ -16,69 +17,38 @@ import CSV from "csvtojson";
 
 export default {
   data() {
-    return {};
+    return {
+      cOutput: ""
+    };
   },
   methods: {
-    fileHandler(e) {
+    handleFile(e) {
+      const vm = this;
       const file = e.target.files[0];
       const reader = new FileReader();
 
-      function getAsText(fileToRead) {
-        var reader = new FileReader();
-        // Read file into memory as UTF-8
-        reader.readAsText(fileToRead);
-        // Handle errors load
-        reader.onload = loadHandler;
-        reader.onerror = errorHandler;
-      }
-
-      function loadHandler(event) {
-        var csv = event.target.result;
-        processData(csv);
-      }
-
-      function processData(csv) {
-        console.log("CCSSVV:::", csv);
-        CSV()
-          .fromString(csv)
-          .then(a => console.log("a:::::", a));
-
-        // console.log("CSV().fromString(csv)", CSV().fromString(csv));
-
-        // var allTextLines = csv.split(/\r\n|\n/);
-        // var lines = [];
-        // for (var i = 0; i < allTextLines.length; i++) {
-        //   var data = allTextLines[i].split(";");
-        //   var tarr = [];
-        //   for (var j = 0; j < data.length; j++) {
-        //     tarr.push(data[j]);
-        //   }
-        //   lines.push(tarr);
-        // }
-        // console.log("LINESSSSSS:::::", lines);
-      }
-
-      function errorHandler(evt) {
-        if (evt.target.error.name == "NotReadableError") {
-          alert("Canno't read file !");
-        }
-      }
-
-      getAsText(file);
-
-      // reader.readAsText(file);
-      // reader.onload = loadHandler;
-      // reader.onerror = errorHandler;
-
-      // function loadHandler(event) {
-      //   var csv = event.target.result;
-      //   processData(csv);
-      // }
-      console.log("fileHandler!:::e.target.files[0] is==>", e.target.files[0]);
-      // console.log("reader.result", reader.result);
-      console.log("file", file);
-      // console.log("reader", reader);
-      // console.log("reader.readAsText(file)", reader.readAsText(file));
+      reader.onload = function(event) {
+        const csvContent = event.target.result;
+        const jsonOutput = CSV()
+          .fromString(csvContent)
+          .then(j => vm.concatData(j));
+      };
+      reader.readAsText(file);
+    },
+    concatData(data) {
+      this.cOutput = data
+        .reduce((acc, obj) => {
+          const keys = ["Group Name", "Meeting Rep Name", "Meeting Rep Phone"];
+          var concattedString = "";
+          keys.forEach((key, index) => {
+            index !== 2
+              ? (concattedString = concattedString.concat(`${obj[key]} `))
+              : (concattedString = concattedString.concat(obj[key]));
+          });
+          acc.push(concattedString);
+          return acc;
+        }, [])
+        .join("\n");
     }
   }
 };
