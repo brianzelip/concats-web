@@ -36,13 +36,17 @@ This app's state flow has the following properties:
 - csv all content - loaded on file input by user
   - data type: string
   - vuex concept: STATE
+  - name: `csv`
 - csv headers get displayed to user to select which headers to concat together, after csv all content loads
   - data type: array of strings
   - vuex concept: GETTER
+  - name: `csvHeaders`
 - csv as json
   - data type: array of objects
   - vuex concept: GETTER
+  - name: `json`
 - output data - happens after user selects which headers to concat together
   - data type: string
   - vuex concept: GETTER
+  - name: `output`
 - reset all above state after output file has been generated, so that app is ready to go at it again
