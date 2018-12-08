@@ -37,10 +37,18 @@ This app's state flow has the following properties:
   - data type: string
   - vuex concept: STATE
   - name: `csv`
-- csv headers get displayed to user to select which headers to concat together, after csv all content loads
+- set csv state
+  - data type: function
+  - vuex concept: MUTATION
+  - name: `SET_CSV`
+- csv headers get displayed to user to select which headers to concat together, after csv all content loads (this is actually STATE, because I'm not going to create it by analyzing the csv content, but rather as the result of [an event in the `csvtojson` library](https://github.com/Keyang/node-csvtojson#header))
   - data type: array of strings
-  - vuex concept: GETTER
+  - vuex concept: STATE
   - name: `csvHeaders`
+- set csvHeaders state
+  - data type: function
+  - vuex concept: MUTATION
+  - name: `SET_CSV_HEADERS`
 - csv as json
   - data type: array of objects
   - vuex concept: GETTER
@@ -50,3 +58,6 @@ This app's state flow has the following properties:
   - vuex concept: GETTER
   - name: `output`
 - reset all above state after output file has been generated, so that app is ready to go at it again
+  - data type: function
+  - vuex concept: MUTATION
+  - name: `RESET_CSV`
