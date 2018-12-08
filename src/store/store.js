@@ -10,9 +10,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state,
-  getters,
-  actions,
-  mutations
+  getters
 });
 
 export default store;
