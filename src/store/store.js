@@ -1,15 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import data from './data.js';
-import * as getters from './getters.js'
+import * as state from './state.js';
+import * as getters from './getters.js';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  state: {
-    data
-  },
+  state,
   getters
 });
 
