@@ -1,1 +1,3 @@
-export const data = '';
+export const csv = '';
+
+export const csvHeaders = [];
