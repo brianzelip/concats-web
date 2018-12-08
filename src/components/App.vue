@@ -1,25 +1,24 @@
 <template>
   <div>
-    <FileInput></FileInput>
+    <TheInput></TheInput>
+    <TheOutput></TheOutput>
     <hr>
-    <AppOutput></AppOutput>
-    <hr>
-    <app-footer></app-footer>
+    <TheFooter></TheFooter>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
 
-import FileInput from "./FileInput.vue";
-import AppOutput from "./AppOutput.vue";
-import appFooter from "./Footer.vue";
+import TheInput from "./Input/TheInput.vue";
+import TheOutput from "./Output/TheOutput.vue";
+import TheFooter from "./global/TheFooter.vue";
 
 export default {
   components: {
-    FileInput,
-    AppOutput,
-    appFooter
+    TheInput,
+    TheOutput,
+    TheFooter
   },
   computed: {
     ...mapState(["data"]),
