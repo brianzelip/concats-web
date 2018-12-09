@@ -27,7 +27,12 @@
     <p>csv headers are:</p>
     <pre>{{ csvInputHeaders }}</pre>
     <p>user selected headers are:</p>
-    <pre>{{ userSelectedHeaders }}</pre>
+    <ol>
+      <li
+        :key="index"
+        v-for="(header, index) in userSelectedHeaders"
+      >{{ header }}</li>
+    </ol>
     <hr>
     <pre>{{ csvOutput }}</pre>
   </section>
