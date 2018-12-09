@@ -24,16 +24,19 @@
         <label :for="`headers-${index}`">{{ header }}</label>
       </div>
     </div>
-    <p>csv headers are:</p>
-    <pre>{{ csvInputHeaders }}</pre>
-    <p>user selected headers are:</p>
-    <ol>
-      <li
-        :key="index"
-        v-for="(header, index) in userSelectedHeaders"
-      >{{ header }}</li>
-    </ol>
-    <hr>
+    <div v-if="userSelectedHeaders.length > 0">
+      <p>user selected headers are:</p>
+      <ol>
+        <li
+          :key="index"
+          v-for="(header, index) in userSelectedHeaders"
+        >{{ header }}</li>
+      </ol>
+    </div>
+    <button
+      :disabled="userSelectedHeaders.length < 1"
+      @click
+    >Concat data</button>
     <pre>{{ csvOutput }}</pre>
   </section>
 </template>
@@ -56,6 +59,7 @@ export default {
       const file = e.target.files[0];
       const reader = new FileReader();
 
+      reader.readAsText(file);
       reader.onload = function(event) {
         const csvContent = event.target.result;
         const jsonOutput = CSV()
@@ -65,7 +69,6 @@ export default {
           })
           .then(json => vm.concatData(json));
       };
-      reader.readAsText(file);
     },
     concatData(data) {
       this.csvOutput = data
