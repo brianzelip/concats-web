@@ -8,7 +8,28 @@
       name="fileInput"
       type="file"
     >
-    <pre>{{ cOutput }}</pre>
+    <div v-if="csvInputHeaders.length > 0">
+      <p>Select the headers to concat in order:</p>
+      <div
+        :key="index"
+        v-for="(header, index) in csvInputHeaders"
+      >
+        <input
+          :id="`headers-${index}`"
+          :value="header"
+          name="headers"
+          type="checkbox"
+          v-model="userSelectedHeaders"
+        >
+        <label :for="`headers-${index}`">{{ header }}</label>
+      </div>
+    </div>
+    <p>csv headers are:</p>
+    <pre>{{ csvInputHeaders }}</pre>
+    <p>user selected headers are:</p>
+    <pre>{{ userSelectedHeaders }}</pre>
+    <hr>
+    <pre>{{ csvOutput }}</pre>
   </section>
 </template>
 
@@ -18,7 +39,10 @@ import CSV from "csvtojson";
 export default {
   data() {
     return {
-      cOutput: ""
+      csvInput: "",
+      csvInputHeaders: [],
+      userSelectedHeaders: [],
+      csvOutput: ""
     };
   },
   methods: {
@@ -32,14 +56,14 @@ export default {
         const jsonOutput = CSV()
           .fromString(csvContent)
           .on("header", header => {
-            // some ACTION fires to set csvHeaders state
+            vm.csvInputHeaders = header;
           })
-          .then(j => vm.concatData(j));
+          .then(json => vm.concatData(json));
       };
       reader.readAsText(file);
     },
     concatData(data) {
-      this.cOutput = data
+      this.csvOutput = data
         .reduce((acc, obj) => {
           const keys = ["Group Name", "Meeting Rep Name", "Meeting Rep Phone"];
           var concattedString = "";
