@@ -2,7 +2,7 @@
   <section>
     <label for="fileInput">Select csv file:</label>
     <input
-      @change="handleFile"
+      @change="setCsvInput"
       accept=".csv"
       id="fileInput"
       name="fileInput"
@@ -33,10 +33,7 @@
         >{{ header }}</li>
       </ol>
     </div>
-    <button
-      :disabled="userSelectedHeaders.length < 1"
-      @click
-    >Concat data</button>
+    <button :disabled="userSelectedHeaders.length < 1">Concat data</button>
     <pre>{{ csvOutput }}</pre>
   </section>
 </template>
@@ -54,20 +51,21 @@ export default {
     };
   },
   methods: {
-    handleFile(e) {
+    setCsvInput(e) {
       const vm = this;
       const file = e.target.files[0];
       const reader = new FileReader();
 
       reader.readAsText(file);
       reader.onload = function(event) {
-        const csvContent = event.target.result;
-        const jsonOutput = CSV()
-          .fromString(csvContent)
-          .on("header", header => {
-            vm.csvInputHeaders = header;
-          })
-          .then(json => vm.concatData(json));
+        vm.csvInput = event.target.result;
+        // const csvContent = event.target.result;
+        // const jsonOutput = CSV()
+        //   .fromString(csvContent)
+        //   .on("header", header => {
+        //     vm.csvInputHeaders = header;
+        //   })
+        //   .then(json => vm.concatData(json));
       };
     },
     concatData(data) {
