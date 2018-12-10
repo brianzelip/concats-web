@@ -36,7 +36,7 @@
     <button
       :disabled="userSelectedHeaders.length < 1"
       @click="setCsvOutput"
-    >Concat data</button>
+    >Submit</button>
     <pre>{{ csvOutput }}</pre>
   </section>
 </template>
@@ -85,7 +85,7 @@ export default {
           const keys = this.userSelectedHeaders;
           var concattedString = "";
           keys.forEach((key, index) => {
-            index !== 2
+            index !== keys.length - 1
               ? (concattedString = concattedString.concat(`${obj[key]} `))
               : (concattedString = concattedString.concat(obj[key]));
           });
