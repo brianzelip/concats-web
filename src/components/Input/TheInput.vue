@@ -47,6 +47,7 @@ export default {
       csvInput: "",
       csvInputHeaders: [],
       userSelectedHeaders: [],
+      csvAsJson: [],
       csvOutput: ""
     };
   },
@@ -62,12 +63,18 @@ export default {
         CSV()
           .fromString(vm.csvInput)
           .on("header", header => {
-            vm.setHeaders(header);
+            vm.setCsvInputHeaders(header);
+          })
+          .then(json => {
+            vm.setCsvAsJson(json);
           });
       };
     },
-    setHeaders(data) {
+    setCsvInputHeaders(data) {
       this.csvInputHeaders = data;
+    },
+    setCsvAsJson(data) {
+      this.csvAsJson = data;
     },
     concatData(data) {
       this.csvOutput = data
