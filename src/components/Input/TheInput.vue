@@ -33,7 +33,10 @@
         >{{ header }}</li>
       </ol>
     </div>
-    <button :disabled="userSelectedHeaders.length < 1">Concat data</button>
+    <button
+      :disabled="userSelectedHeaders.length < 1"
+      @click="setCsvOutput"
+    >Concat data</button>
     <pre>{{ csvOutput }}</pre>
   </section>
 </template>
@@ -76,10 +79,10 @@ export default {
     setCsvAsJson(data) {
       this.csvAsJson = data;
     },
-    concatData(data) {
-      this.csvOutput = data
+    setCsvOutput() {
+      this.csvOutput = this.csvAsJson
         .reduce((acc, obj) => {
-          const keys = ["Group Name", "Meeting Rep Name", "Meeting Rep Phone"];
+          const keys = this.userSelectedHeaders;
           var concattedString = "";
           keys.forEach((key, index) => {
             index !== 2
