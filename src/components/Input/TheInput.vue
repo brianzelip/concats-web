@@ -2,7 +2,7 @@
   <section>
     <label for="fileInput">Select csv file:</label>
     <input
-      @change="setCsvInput"
+      @change="ingestCsv"
       accept=".csv"
       id="fileInput"
       name="fileInput"
@@ -51,7 +51,7 @@ export default {
     };
   },
   methods: {
-    setCsvInput(e) {
+    ingestCsv(e) {
       const vm = this;
       const file = e.target.files[0];
       const reader = new FileReader();
@@ -59,14 +59,15 @@ export default {
       reader.readAsText(file);
       reader.onload = function(event) {
         vm.csvInput = event.target.result;
-        // const csvContent = event.target.result;
-        // const jsonOutput = CSV()
-        //   .fromString(csvContent)
-        //   .on("header", header => {
-        //     vm.csvInputHeaders = header;
-        //   })
-        //   .then(json => vm.concatData(json));
+        CSV()
+          .fromString(vm.csvInput)
+          .on("header", header => {
+            vm.setHeaders(header);
+          });
       };
+    },
+    setHeaders(data) {
+      this.csvInputHeaders = data;
     },
     concatData(data) {
       this.csvOutput = data
